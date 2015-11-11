@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WorkOutV2.rutina>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.maquinas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descanso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.series)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.repeticiones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_uso)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.maquinas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descanso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.series)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.repeticiones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_uso)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

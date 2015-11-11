@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Modelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="rutina">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="maquinas" Type="varchar" MaxLength="256" />
+    <Property Name="descanso" Type="varchar" MaxLength="256" />
+    <Property Name="series" Type="varchar" MaxLength="256" />
+    <Property Name="repeticiones" Type="varchar" MaxLength="256" />
+    <Property Name="fecha_uso" Type="date" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="usuario" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="pass" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="apellido1" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="apellido2" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="edad" Type="int" Nullable="false" />
+    <Property Name="correo" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="altura" Type="float" Nullable="false" />
+    <Property Name="peso" Type="float" Nullable="false" />
+    <Property Name="ind_muscular" Type="float" Nullable="false" />
+    <Property Name="ind_grasa" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario_rutina">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+      <PropertyRef Name="id_rutina" />
+    </Key>
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+    <Property Name="id_rutina" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Rutina">
+    <End Role="rutina" Type="Self.rutina" Multiplicity="1" />
+    <End Role="usuario_rutina" Type="Self.usuario_rutina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rutina">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="usuario_rutina">
+        <PropertyRef Name="id_rutina" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_rutina" Type="Self.usuario_rutina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="usuario_rutina">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModeloStoreContainer">
+    <EntitySet Name="rutina" EntityType="Self.rutina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario_rutina" EntityType="Self.usuario_rutina" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Rutina" Association="Self.FK_Rutina">
+      <End Role="rutina" EntitySet="rutina" />
+      <End Role="usuario_rutina" EntitySet="usuario_rutina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario" Association="Self.FK_Usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_rutina" EntitySet="usuario_rutina" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

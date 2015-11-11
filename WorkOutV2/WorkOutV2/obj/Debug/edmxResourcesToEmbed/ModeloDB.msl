@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModeloStoreContainer" CdmEntityContainer="EntidadDB">
+    <EntitySetMapping Name="rutina">
+      <EntityTypeMapping TypeName="Modelo.rutina">
+        <MappingFragment StoreEntitySet="rutina">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="maquinas" ColumnName="maquinas" />
+          <ScalarProperty Name="descanso" ColumnName="descanso" />
+          <ScalarProperty Name="series" ColumnName="series" />
+          <ScalarProperty Name="repeticiones" ColumnName="repeticiones" />
+          <ScalarProperty Name="fecha_uso" ColumnName="fecha_uso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="Modelo.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="usuario1" ColumnName="usuario" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+          <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+          <ScalarProperty Name="edad" ColumnName="edad" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="altura" ColumnName="altura" />
+          <ScalarProperty Name="peso" ColumnName="peso" />
+          <ScalarProperty Name="ind_muscular" ColumnName="ind_muscular" />
+          <ScalarProperty Name="ind_grasa" ColumnName="ind_grasa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="usuario_rutina" TypeName="Modelo.usuario_rutina" StoreEntitySet="usuario_rutina">
+      <EndProperty Name="rutina">
+        <ScalarProperty Name="id" ColumnName="id_rutina" />
+      </EndProperty>
+      <EndProperty Name="usuario">
+        <ScalarProperty Name="id" ColumnName="id_usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

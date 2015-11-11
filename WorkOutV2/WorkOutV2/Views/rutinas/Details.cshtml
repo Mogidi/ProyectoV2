@@ -1,0 +1,58 @@
+﻿@model WorkOutV2.rutina
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>rutina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.maquinas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maquinas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descanso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descanso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.series)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.series)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.repeticiones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.repeticiones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_uso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_uso)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Modelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="rutina">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="maquinas" Type="varchar" MaxLength="256" />
+          <Property Name="descanso" Type="varchar" MaxLength="256" />
+          <Property Name="series" Type="varchar" MaxLength="256" />
+          <Property Name="repeticiones" Type="varchar" MaxLength="256" />
+          <Property Name="fecha_uso" Type="date" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="pass" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="apellido1" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="apellido2" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="edad" Type="int" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="altura" Type="float" Nullable="false" />
+          <Property Name="peso" Type="float" Nullable="false" />
+          <Property Name="ind_muscular" Type="float" Nullable="false" />
+          <Property Name="ind_grasa" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario_rutina">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="id_rutina" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_rutina" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Rutina">
+          <End Role="rutina" Type="Self.rutina" Multiplicity="1" />
+          <End Role="usuario_rutina" Type="Self.usuario_rutina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rutina">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_rutina">
+              <PropertyRef Name="id_rutina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_rutina" Type="Self.usuario_rutina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_rutina">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModeloStoreContainer">
+          <EntitySet Name="rutina" EntityType="Self.rutina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario_rutina" EntityType="Self.usuario_rutina" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Rutina" Association="Self.FK_Rutina">
+            <End Role="rutina" EntitySet="rutina" />
+            <End Role="usuario_rutina" EntitySet="usuario_rutina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario" Association="Self.FK_Usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_rutina" EntitySet="usuario_rutina" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Modelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="rutina">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="maquinas" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="descanso" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="series" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="repeticiones" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_uso" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="usuario" Relationship="Self.usuario_rutina" FromRole="rutina" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="usuario1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pass" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="edad" Type="Int32" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="altura" Type="Double" Nullable="false" />
+          <Property Name="peso" Type="Double" Nullable="false" />
+          <Property Name="ind_muscular" Type="Double" Nullable="false" />
+          <Property Name="ind_grasa" Type="Double" Nullable="false" />
+          <NavigationProperty Name="rutina" Relationship="Self.usuario_rutina" FromRole="usuario" ToRole="rutina" />
+        </EntityType>
+        <Association Name="usuario_rutina">
+          <End Role="rutina" Type="Self.rutina" Multiplicity="*" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EntidadDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="rutina" EntityType="Self.rutina" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="usuario_rutina" Association="Self.usuario_rutina">
+            <End Role="rutina" EntitySet="rutina" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModeloStoreContainer" CdmEntityContainer="EntidadDB">
+          <EntitySetMapping Name="rutina">
+            <EntityTypeMapping TypeName="Modelo.rutina">
+              <MappingFragment StoreEntitySet="rutina">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="maquinas" ColumnName="maquinas" />
+                <ScalarProperty Name="descanso" ColumnName="descanso" />
+                <ScalarProperty Name="series" ColumnName="series" />
+                <ScalarProperty Name="repeticiones" ColumnName="repeticiones" />
+                <ScalarProperty Name="fecha_uso" ColumnName="fecha_uso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="Modelo.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usuario1" ColumnName="usuario" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="altura" ColumnName="altura" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="ind_muscular" ColumnName="ind_muscular" />
+                <ScalarProperty Name="ind_grasa" ColumnName="ind_grasa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="usuario_rutina" TypeName="Modelo.usuario_rutina" StoreEntitySet="usuario_rutina">
+            <EndProperty Name="rutina">
+              <ScalarProperty Name="id" ColumnName="id_rutina" />
+            </EndProperty>
+            <EndProperty Name="usuario">
+              <ScalarProperty Name="id" ColumnName="id_usuario" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

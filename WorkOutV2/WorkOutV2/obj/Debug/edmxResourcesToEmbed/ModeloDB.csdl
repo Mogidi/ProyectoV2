@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Modelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="rutina">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="maquinas" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="descanso" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="series" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="repeticiones" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_uso" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="usuario" Relationship="Self.usuario_rutina" FromRole="rutina" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="usuario1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pass" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="edad" Type="Int32" Nullable="false" />
+    <Property Name="correo" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="altura" Type="Double" Nullable="false" />
+    <Property Name="peso" Type="Double" Nullable="false" />
+    <Property Name="ind_muscular" Type="Double" Nullable="false" />
+    <Property Name="ind_grasa" Type="Double" Nullable="false" />
+    <NavigationProperty Name="rutina" Relationship="Self.usuario_rutina" FromRole="usuario" ToRole="rutina" />
+  </EntityType>
+  <Association Name="usuario_rutina">
+    <End Role="rutina" Type="Self.rutina" Multiplicity="*" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="EntidadDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="rutina" EntityType="Self.rutina" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="usuario_rutina" Association="Self.usuario_rutina">
+      <End Role="rutina" EntitySet="rutina" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
